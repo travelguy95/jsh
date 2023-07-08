@@ -118,6 +118,12 @@ def border_collide(self,rows,cols):
   #     self.x = self.x - 0.25*dt*self.u
   #     self.y = self.y + 0.25*dt*self.v
 
+
+obstruct = np.load("/content/jsh/obstruct.npy")
+obstruct_u = np.load("/content/jsh/obstruct_u.npy")
+obstruct_v = np.load("/content/jsh/obstruct_v.npy")
+obstruct_copy = np.load("/content/jsh/obstruct_copy.npy")
+
 jit(nopython=True)
 def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v):
   h = 1 # grid spacing must be at least 2*radius
