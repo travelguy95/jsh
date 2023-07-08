@@ -1,3 +1,12 @@
+import random
+import pandas as pd
+import math
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib.pyplot import figure
+from numba import jit
+import matplotlib.colors as colors
+
 def obstruct_arrays(obstruct):
   rows,cols = obstruct.shape
   obstruct_u = np.ones((rows,cols+1))
