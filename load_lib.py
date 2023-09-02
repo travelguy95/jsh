@@ -87,9 +87,9 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
       if col > cols-1:
         col = cols-1
       if list_of_list_positions[row*cols+col] == None:
-          list_of_list_positions[row*cols+col] = [list_pos]
+          list_of_list_positions[row*cols+col] = [particle.list_pos] #list_pos --> particle.list_pos
       else:
-          list_of_list_positions[row*cols+col].append(list_pos)
+          list_of_list_positions[row*cols+col].append(particle.list_pos) #list_pos --> particle.list_pos
     for i, particle in enumerate(my_particles):
       # the grid position of this particle:
       row = math.floor(particle.y)
@@ -132,9 +132,9 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
       row = math.floor(particle.y)
       col = math.floor(particle.x)
       if list_of_list_positions[row*cols+col] == None:
-          list_of_list_positions[row*cols+col] = [list_pos]
+          list_of_list_positions[row*cols+col] = [particle.list_pos] #list_pos --> particle.list_pos
       else:
-          list_of_list_positions[row*cols+col].append(list_pos)
+          list_of_list_positions[row*cols+col].append(particle.list_pos) #list_pos --> particle.list_pos
     u_old = np.zeros((rows,cols+1))
     for row in range(0,rows):
       for col in range(0,cols+1):
