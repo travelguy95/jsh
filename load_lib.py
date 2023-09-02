@@ -91,7 +91,7 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
           list_of_list_positions[row*cols+col] = [particle.list_pos] #list_pos --> particle.list_pos
       else:
           list_of_list_positions[row*cols+col].append(particle.list_pos) #list_pos --> particle.list_pos
-    for times in range(0,1):
+    for times in range(0,5):
       for i, particle in enumerate(my_particles):
         # the grid position of this particle:
         row = math.floor(particle.y)
@@ -128,7 +128,8 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
                     neighbor_particles2.append(my_particles[neighbor_list_position])
         for particle2 in neighbor_particles2:
             collide(particle, particle2)
-        border_collide(particle,rows,cols) #check again as particles moved due to collision
+        for count in range(0,10):
+          border_collide(particle,rows,cols) #check again as particles moved due to collision
         
     list_of_list_positions = [None] * rows * cols
     for i, particle in enumerate(my_particles):
