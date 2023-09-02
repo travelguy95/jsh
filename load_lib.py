@@ -91,7 +91,7 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
           list_of_list_positions[row*cols+col] = [particle.list_pos] #list_pos --> particle.list_pos
       else:
           list_of_list_positions[row*cols+col].append(particle.list_pos) #list_pos --> particle.list_pos
-    for times in range(0,10):
+    for times in range(0,1):
       for i, particle in enumerate(my_particles):
         # the grid position of this particle:
         row = math.floor(particle.y)
@@ -134,6 +134,10 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
     for i, particle in enumerate(my_particles):
       row = math.floor(particle.y)
       col = math.floor(particle.x)
+      if col > cols-1:
+        col = cols-1
+      if row > rows-1:
+        row = rows-1
       if list_of_list_positions[row*cols+col] == None:
           list_of_list_positions[row*cols+col] = [particle.list_pos] #list_pos --> particle.list_pos
       else:
