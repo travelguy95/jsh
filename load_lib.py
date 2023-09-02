@@ -76,8 +76,9 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
       particle.v = particle.v + dt*g
       particle.x = particle.x + particle.u*dt
       particle.y = particle.y + (-1*particle.v)*dt
-    for i, particle in enumerate(my_particles):
-      border_collide(particle,rows,cols)
+    for count in range(0,10):
+      for i, particle in enumerate(my_particles):
+        border_collide(particle,rows,cols)
     list_of_list_positions = [None] * rows * cols
     for i, particle in enumerate(my_particles):
       row = math.floor(particle.y)
@@ -90,43 +91,45 @@ def run_code(rows,cols,steps,obstruct,obstruct_u,obstruct_v,skip_value):
           list_of_list_positions[row*cols+col] = [particle.list_pos] #list_pos --> particle.list_pos
       else:
           list_of_list_positions[row*cols+col].append(particle.list_pos) #list_pos --> particle.list_pos
-    for i, particle in enumerate(my_particles):
-      # the grid position of this particle:
-      row = math.floor(particle.y)
-      col = math.floor(particle.x)
-      if col > cols-1:
-          col = cols-1
-      if row > rows-1:
-          row = rows-1
-      neighbor_particles = []
-      if list_of_list_positions[row * cols + col] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[row * cols + col]
-      if col !=0 and list_of_list_positions[row * cols + col-1] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[row * cols + col-1]
-      if col !=0 and row!= 0 and list_of_list_positions[(row-1) * cols + col-1] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[(row-1) * cols + col-1]
-      if col !=0 and row!= rows-1 and list_of_list_positions[(row+1) * cols + col-1] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[(row+1) * cols + col-1]
-      if col != cols-1 and list_of_list_positions[row * cols + col+1] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[row * cols + col+1]
-      if col != cols - 1 and row != 0 and list_of_list_positions[(row-1) * cols + col + 1] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[(row-1) * cols + col + 1]
-      if col != cols - 1 and row != rows-1 and list_of_list_positions[(row+1) * cols + col + 1] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[(row+1) * cols + col + 1]
-      if row != 0 and list_of_list_positions[(row-1) * cols + col] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[(row-1) * cols + col]
-      if row != rows-1 and list_of_list_positions[(row+1) * cols + col] != None:
-          neighbor_particles = neighbor_particles + list_of_list_positions[(row+1) * cols + col]
-      neighbor_length = len(neighbor_particles)
-      neighbor_particles2 = []
-      if neighbor_length != 0:
-          for count in range(0,neighbor_length):
-              neighbor_list_position = neighbor_particles[count]
-              if neighbor_list_position != particle.list_pos:
-                  neighbor_particles2.append(my_particles[neighbor_list_position])
-      for particle2 in neighbor_particles2:
-          collide(particle, particle2)
-      border_collide(particle,rows,cols) #check again as particles moved due to collision
+    for count in range(0,10):
+      for i, particle in enumerate(my_particles):
+        # the grid position of this particle:
+        row = math.floor(particle.y)
+        col = math.floor(particle.x)
+        if col > cols-1:
+            col = cols-1
+        if row > rows-1:
+            row = rows-1
+        neighbor_particles = []
+        if list_of_list_positions[row * cols + col] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[row * cols + col]
+        if col !=0 and list_of_list_positions[row * cols + col-1] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[row * cols + col-1]
+        if col !=0 and row!= 0 and list_of_list_positions[(row-1) * cols + col-1] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[(row-1) * cols + col-1]
+        if col !=0 and row!= rows-1 and list_of_list_positions[(row+1) * cols + col-1] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[(row+1) * cols + col-1]
+        if col != cols-1 and list_of_list_positions[row * cols + col+1] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[row * cols + col+1]
+        if col != cols - 1 and row != 0 and list_of_list_positions[(row-1) * cols + col + 1] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[(row-1) * cols + col + 1]
+        if col != cols - 1 and row != rows-1 and list_of_list_positions[(row+1) * cols + col + 1] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[(row+1) * cols + col + 1]
+        if row != 0 and list_of_list_positions[(row-1) * cols + col] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[(row-1) * cols + col]
+        if row != rows-1 and list_of_list_positions[(row+1) * cols + col] != None:
+            neighbor_particles = neighbor_particles + list_of_list_positions[(row+1) * cols + col]
+        neighbor_length = len(neighbor_particles)
+        neighbor_particles2 = []
+        if neighbor_length != 0:
+            for count in range(0,neighbor_length):
+                neighbor_list_position = neighbor_particles[count]
+                if neighbor_list_position != particle.list_pos:
+                    neighbor_particles2.append(my_particles[neighbor_list_position])
+        for count in range(0,10):
+          for particle2 in neighbor_particles2:
+              collide(particle, particle2)
+        border_collide(particle,rows,cols) #check again as particles moved due to collision
     list_of_list_positions = [None] * rows * cols
     for i, particle in enumerate(my_particles):
       row = math.floor(particle.y)
