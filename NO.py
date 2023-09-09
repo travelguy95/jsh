@@ -290,7 +290,7 @@ from pathlib import Path
 
 def load_darcy_flow_small(n_train, n_tests,
                 batch_size, test_batch_sizes,
-                test_resolutions=[128],
+                test_resolutions=[256],
                 grid_boundaries=[[0,1],[0,1]],
                 positional_encoding=True,
                 encode_input=False,
@@ -326,11 +326,11 @@ def load_darcy_flow_small(n_train, n_tests,
     #     if res not in [64]:
     #         raise ValueError(f'Only 32 and 64 are supported for test resolution, but got {test_resolutions=}')
     # path = Path(__file__).resolve().parent.joinpath('data')
-    path = Path("").resolve().parent.joinpath('/content/drive/MyDrive/data')
+    path = Path("").resolve().parent.joinpath('/content/drive/MyDrive/Josh')
     return load_darcy_pt(str(path), 
                          n_train=n_train, n_tests=n_tests, 
                          batch_size=batch_size, test_batch_sizes=test_batch_sizes,
-                         test_resolutions=test_resolutions, train_resolution=128,
+                         test_resolutions=test_resolutions, train_resolution=256,
                          grid_boundaries=grid_boundaries,
                          positional_encoding=positional_encoding,
                          encode_input=encode_input,
@@ -341,8 +341,8 @@ def load_darcy_flow_small(n_train, n_tests,
 def load_darcy_pt(data_path, 
                 n_train, n_tests,
                 batch_size, test_batch_sizes,
-                test_resolutions=[128],
-                train_resolution=128,
+                test_resolutions=[256],
+                train_resolution=256,
                 grid_boundaries=[[0,1],[0,1]],
                 positional_encoding=True,
                 encode_input=False,
@@ -351,7 +351,7 @@ def load_darcy_pt(data_path,
                 channel_dim=1):
     """Load the Navier-Stokes dataset
     """
-    data = torch.load(Path(data_path).joinpath(f'ocean_train_{train_resolution}_advanced.pt').as_posix())
+    data = torch.load(Path(data_path).joinpath(f'levee_training.pt').as_posix())
     x_train = data['x'][0:n_train, :, :].unsqueeze(channel_dim).type(torch.float32).clone()
     y_train = data['y'][0:n_train, :, :].unsqueeze(channel_dim).clone()
     del data
@@ -361,15 +361,15 @@ def load_darcy_pt(data_path,
     test_resolutions.pop(idx)
     n_test = n_tests.pop(idx)
     test_batch_size = test_batch_sizes.pop(idx)
-    data = torch.load(Path(data_path).joinpath(f'ocean_test_{train_resolution}_advanced.pt').as_posix())
+    data = torch.load(Path(data_path).joinpath(f'levee_training.pt').as_posix())
     #####################################
     
     ############ for validation ###########
-    # idx = test_resolutions.index(1024)
+    # idx = test_resolutions.index(256)
     # test_resolutions.pop(idx)
     # n_test = n_tests.pop(idx)
     # test_batch_size = test_batch_sizes.pop(idx)
-    # data = torch.load(Path(data_path).joinpath(f'ocean_test_{1024}.pt').as_posix())
+    # data = torch.load(Path(data_path).joinpath(f'levee_testing.pt').as_posix())
     #####################################
 
     x_test = data['x'][:n_test, :, :].unsqueeze(channel_dim).type(torch.float32).clone()
@@ -413,7 +413,7 @@ def load_darcy_pt(data_path,
     ###############################################
 
     ############ for validation use this ##########
-    # test_loaders =  {1024: test_loader}
+    # test_loaders =  {256: test_loader}
     ###############################################
 
     for (res, n_test, test_batch_size) in zip(test_resolutions, n_tests, test_batch_sizes):
