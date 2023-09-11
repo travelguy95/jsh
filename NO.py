@@ -361,7 +361,7 @@ def load_darcy_pt(data_path,
     test_resolutions.pop(idx)
     n_test = n_tests.pop(idx)
     test_batch_size = test_batch_sizes.pop(idx)
-    data = torch.load(Path(data_path).joinpath(f'levee_training.pt').as_posix())
+    data = torch.load(Path(data_path).joinpath(f'levee_testing.pt').as_posix())
     #####################################
     
     ############ for validation ###########
