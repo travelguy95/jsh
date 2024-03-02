@@ -351,7 +351,7 @@ def load_darcy_pt(data_path,
                 channel_dim=1):
     """Load the Navier-Stokes dataset
     """
-    data = torch.load(Path(data_path).joinpath(f'levee_training.pt').as_posix())
+    data = torch.load(Path(data_path).joinpath(f'training.pt').as_posix())
     x_train = data['x'][0:n_train, :, :].unsqueeze(channel_dim).type(torch.float32).clone()
     y_train = data['y'][0:n_train, :, :].unsqueeze(channel_dim).clone()
     del data
@@ -361,7 +361,7 @@ def load_darcy_pt(data_path,
     test_resolutions.pop(idx)
     n_test = n_tests.pop(idx)
     test_batch_size = test_batch_sizes.pop(idx)
-    data = torch.load(Path(data_path).joinpath(f'levee_testing.pt').as_posix())
+    data = torch.load(Path(data_path).joinpath(f'testing.pt').as_posix())
     #####################################
     
     ############ for validation ###########
@@ -369,7 +369,7 @@ def load_darcy_pt(data_path,
     # test_resolutions.pop(idx)
     # n_test = n_tests.pop(idx)
     # test_batch_size = test_batch_sizes.pop(idx)
-    # data = torch.load(Path(data_path).joinpath(f'levee_testing.pt').as_posix())
+    # data = torch.load(Path(data_path).joinpath(f'testing.pt').as_posix())
     #####################################
 
     x_test = data['x'][:n_test, :, :].unsqueeze(channel_dim).type(torch.float32).clone()
@@ -418,7 +418,7 @@ def load_darcy_pt(data_path,
 
     for (res, n_test, test_batch_size) in zip(test_resolutions, n_tests, test_batch_sizes):
         print(f'Loading test db at resolution {res} with {n_test} samples and batch-size={test_batch_size}')
-        data = torch.load(Path(data_path).joinpath(f'levee_testing.pt').as_posix())
+        data = torch.load(Path(data_path).joinpath(f'testing.pt').as_posix())
         x_test = data['x'][:n_test, :, :].unsqueeze(channel_dim).type(torch.float32).clone()
         y_test = data['y'][:n_test, :, :].unsqueeze(channel_dim).clone()
         del data 
