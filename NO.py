@@ -326,7 +326,7 @@ def load_darcy_flow_small(n_train, n_tests,
     #     if res not in [64]:
     #         raise ValueError(f'Only 32 and 64 are supported for test resolution, but got {test_resolutions=}')
     # path = Path(__file__).resolve().parent.joinpath('data')
-    path = Path("").resolve().parent.joinpath('/content/drive/MyDrive/')
+    path = Path("").resolve().parent.joinpath('/content/drive/MyDrive/Josh/')
     return load_darcy_pt(str(path), 
                          n_train=n_train, n_tests=n_tests, 
                          batch_size=batch_size, test_batch_sizes=test_batch_sizes,
